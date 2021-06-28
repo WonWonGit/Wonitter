@@ -13,26 +13,38 @@ const Nweet = ({ nweetObj, isOwner }) => {
   };
   const toggleEditing = () => setEditing((prev) => !prev);
   const onSubmit = (event) => {
-      event.preventDefault();
-      console.log(nweetObj, newNweet);
-      dbService.doc(`wonweets/${nweetObj.id}`).update({
-        text:newNweet,
-    })
-    setEditing(false)
-  }
+    event.preventDefault();
+    console.log(nweetObj, newNweet);
+    dbService.doc(`wonweets/${nweetObj.id}`).update({
+      text: newNweet,
+    });
+    setEditing(false);
+  };
   const onChange = (event) => {
-      const {target: {value},} =event;
-      setNewNweet(value);
+    const {
+      target: { value },
+    } = event;
+    setNewNweet(value);
   };
   return (
     <div>
       {editing ? (
-          <>
-        <form onSubmit={onSubmit}>
-          <input type="text" placeholder="Edit your wonweet" value={newNweet} required onChange={onChange}/>
-          <input type="submit" value="Update wonweet"/>
-        </form>
-        <button onClick={toggleEditing}>Cancel</button>
+        <>
+          {isOwner && (
+            <>
+              <form onSubmit={onSubmit}>
+                <input
+                  type="text"
+                  placeholder="Edit your wonweet"
+                  value={newNweet}
+                  required
+                  onChange={onChange}
+                />
+                <input type="submit" value="Update wonweet" />
+              </form>
+              <button onClick={toggleEditing}>Cancel</button>
+            </>
+          )}
         </>
       ) : (
         <>
