@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { dbService } from "../fbInstance";
+import { v4 as uuidv4 } from 'uuid';
+import { dbService, storageService } from "../fbInstance";
 import Nweet from "../components/Nweet";
 
 const Home = ({ userObj }) => {
@@ -17,12 +18,16 @@ const Home = ({ userObj }) => {
   }, []);
   const onSubmit = async (event) => {
     event.preventDefault();
-    await dbService.collection("wonweets").add({
+    const fileRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
+    console.log(userObj.uid)
+    const response = await fileRef.putString(attachment,"data_url");
+    console.log(response)
+   /*await dbService.collection("wonweets").add({
       text: nweet,
       creatAt: Date.now(),
       creatorId: userObj.uid,
     });
-    setNweet("");
+    setNweet("");*/
   };
   const onChange = (event) => {
     const {
@@ -37,7 +42,7 @@ const Home = ({ userObj }) => {
     const theFile = files[0];
     const reader = new FileReader();
     reader.onloadend = (finishedEvent) => {
-      console.log(finishedEvent);
+      
       const {
         currentTarget: { result },
       } = finishedEvent;
@@ -46,7 +51,7 @@ const Home = ({ userObj }) => {
     reader.readAsDataURL(theFile);
   };
   console.log(nweets);
-  const onClearAttachmentClick = () => setAttachment(null)
+  const onClearAttachmentClick = () => setAttachment(null);
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -61,7 +66,7 @@ const Home = ({ userObj }) => {
         <input type="submit" value="Nweet" />
         {attachment && (
           <div>
-            <img src={attachment} width="50px" height="50px" />
+            <img src={attachment} width="50px" height="50px" alt="img"/>
             <button onClick={onClearAttachmentClick}>Clear</button>
           </div>
         )}
