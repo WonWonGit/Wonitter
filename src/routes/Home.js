@@ -19,7 +19,7 @@ const Home = ({ userObj }) => {
   const onSubmit = async (event) => {
     event.preventDefault();
     let attachmentUrl = "";
-    if(attachment != ""){
+    if(attachment !== ""){
         const attechmenRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
     console.log(userObj.uid)
     const response = await attechmenRef.putString(attachment,"data_url");
