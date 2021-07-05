@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { authService } from "../fbInstance";
+import { authService, dbService } from "../fbInstance";
 
-export default () => {
+export default ({userObj}) => {
     const history = useHistory();
     const onLogOutClick = () => {
         authService.signOut();
         history.push("/");
-    }
+    };
+const getMyNweets = async() => {
+    const nweets = await dbService.collection("wonweets").where("creatorId", "==", userObj.uid).orderBy("creatAt").get();
+    console.log(nweets.docs.map(doc => doc.data()));
+};
+useEffect(()=>{
+    getMyNweets();
+},[])
 return(
     <>
         <button onClick={onLogOutClick}>Log Out</button>
