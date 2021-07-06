@@ -1,23 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { authService, dbService } from "../fbInstance";
+import { authService } from "../fbInstance";
 
-export default ({userObj}) => {
-    const history = useHistory();
-    const onLogOutClick = () => {
-        authService.signOut();
-        history.push("/");
-    };
-const getMyNweets = async() => {
-    const nweets = await dbService.collection("wonweets").where("creatorId", "==", userObj.uid).orderBy("creatAt").get();
-    console.log(nweets.docs.map(doc => doc.data()));
-};
-useEffect(()=>{
-    getMyNweets();
-},[])
-return(
+export default ({ userObj }) => {
+  const history = useHistory();
+  const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
+  const onLogOutClick = () => {
+    authService.signOut();
+    history.push("/");
+  };
+  const onChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setNewDisplayName(value);
+  };
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    if(userObj.displayName !== newDisplayName){
+        await userObj.updateProfile({
+            displayName: newDisplayName,
+        });
+    }
+  };
+  return (
     <>
-        <button onClick={onLogOutClick}>Log Out</button>
+      <form onSubmit={onSubmit}>
+        <input onChange={onChange} type="text" placeholder="Display name" value={newDisplayName} />
+        <input type="submit" value="Update Profile" />
+      </form>
+      <button onClick={onLogOutClick}>Log Out</button>
     </>
-);
-}
+  );
+};
