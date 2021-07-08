@@ -9,7 +9,6 @@ const Nweet = ({ nweetObj, isOwner }) => {
     if (ok) {
       await dbService.doc(`wonweets/${nweetObj.id}`).delete();
       await storageService.refFromURL(nweetObj.attachmentUrl).delete();
-    } else {
     }
   };
   const toggleEditing = () => setEditing((prev) => !prev);
