@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { authService, firebaseInstance } from "../fbInstance";
 import AuthForm from "../components/AuthForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faTwitter,
+    faGoogle,
+    faGithub,
+  } from "@fortawesome/free-brands-svg-icons";
 
 const Auth = () => {
   const onSocailClick = async (event) => {
@@ -15,11 +21,21 @@ const Auth = () => {
       console.log(data);
   };
   return (
-    <div>
-    <AuthForm />
-        <div>
-        <button onClick={onSocailClick} name="google">Continue with Google</button>
-        <button onClick={onSocailClick} name="github">Continue with Github</button>
+    <div className="authContainer">
+      <FontAwesomeIcon
+        icon={faTwitter}
+        color={"#04AAFF"}
+        size="3x"
+        style={{ marginBottom: 30 }}
+      />
+      <AuthForm />
+      <div className="authBtns">
+        <button onClick={onSocailClick} name="google" className="authBtn">
+          Continue with Google <FontAwesomeIcon icon={faGoogle} />
+        </button>
+        <button onClick={onSocailClick} name="github" className="authBtn">
+          Continue with Github <FontAwesomeIcon icon={faGithub} />
+        </button>
       </div>
     </div>
   );
