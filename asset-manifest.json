@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/Wonitter/static/css/main.3e675ac3.chunk.css",
+    "main.js": "/Wonitter/static/js/main.4ffec80c.chunk.js",
+    "main.js.map": "/Wonitter/static/js/main.4ffec80c.chunk.js.map",
+    "runtime-main.js": "/Wonitter/static/js/runtime-main.6656d71c.js",
+    "runtime-main.js.map": "/Wonitter/static/js/runtime-main.6656d71c.js.map",
+    "static/js/2.815faaee.chunk.js": "/Wonitter/static/js/2.815faaee.chunk.js",
+    "static/js/2.815faaee.chunk.js.map": "/Wonitter/static/js/2.815faaee.chunk.js.map",
+    "index.html": "/Wonitter/index.html",
+    "static/css/main.3e675ac3.chunk.css.map": "/Wonitter/static/css/main.3e675ac3.chunk.css.map",
+    "static/js/2.815faaee.chunk.js.LICENSE.txt": "/Wonitter/static/js/2.815faaee.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6656d71c.js",
+    "static/js/2.815faaee.chunk.js",
+    "static/css/main.3e675ac3.chunk.css",
+    "static/js/main.4ffec80c.chunk.js"
+  ]
+}
