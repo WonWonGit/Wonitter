@@ -51,6 +51,7 @@ const NweetFactory = ({ userObj }) => {
   };
   const onClearAttachment = () => setAttachment(null);
   return (
+    <div className="factoryFormdiv">
     <form onSubmit={onSubmit} className="factoryForm">
       <div className="factoryInput__container">
         <input
@@ -91,6 +92,7 @@ const NweetFactory = ({ userObj }) => {
         </div>
       )}
     </form>
+    </div>
   );
 };
 export default NweetFactory;
