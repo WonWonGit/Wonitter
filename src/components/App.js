@@ -3,7 +3,9 @@ import AppRouter from 'components/Router';
 import {authService} from 'fbInstance';
 
 function App() {
+  //초기화가 됐는지 안됐는지 알려주는 state이다.
   const[init, setInit] = useState(false);
+  // 로그인이 됐는지 안됐는지 알려주는 state이다.
   const [userObj,setUserObj] = useState(null);
   useEffect(()=>{
     authService.onAuthStateChanged((user)=>{
